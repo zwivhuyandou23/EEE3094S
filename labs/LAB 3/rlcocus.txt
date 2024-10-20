@@ -1,0 +1,26 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import control as ctrl
+
+# Define the transfer function G(s)
+num = [23.85]         # Numerator coefficients
+den = [5.44, 1]      # Denominator coefficients
+G = ctrl.TransferFunction(num, den)
+
+# Plot Root Locus
+plt.figure(figsize=(10, 6))
+ctrl.root_locus(G, Plot=True)
+plt.title('Root Locus of the System G(s) = 23.85 / (5.44s + 1)')
+plt.xlabel('Real Axis')
+plt.ylabel('Imaginary Axis')
+plt.grid(True)
+plt.axhline(0, color='black', lw=0.5, ls='--')
+plt.axvline(0, color='black', lw=0.5, ls='--')
+
+# Highlight the specified poles
+poles = [-0.8 + 1.561j, -0.8 - 1.561j]
+plt.plot([pole.real for pole in poles], [pole.imag for pole in poles], 'ro', markersize=8, label='Specified Poles')
+plt.legend()
+
+# Show the plot
+plt.show()
